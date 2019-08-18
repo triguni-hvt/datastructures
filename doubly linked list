@@ -9,7 +9,7 @@ struct node
 struct node *root=NULL;
 void append()
 {
-    struct node* temp;
+    struct node* temp
     temp=(struct node*)malloc(sizeof(struct node));
     printf("enter node data");
     scanf("%d",&temp->data);
