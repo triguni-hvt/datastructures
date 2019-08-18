@@ -1,0 +1,146 @@
+#include <stdio.h>
+
+struct node
+{
+    int data ;
+    struct node *left,*right;
+};
+
+struct node *root=NULL;
+void append()
+{
+    struct node* temp;
+    temp=(struct node*)malloc(sizeof(struct node));
+    printf("enter node data");
+    scanf("%d",&temp->data);
+    if(root==NULL)
+    {
+        root=temp;
+    }
+    else
+    {
+        struct node* p;
+        p=root;
+        while(p->right!=NULL)
+        {
+            p=p->right;
+        }
+        p->right=temp;
+        temp->left=p;
+    }
+}
+
+void addatbegin()
+{
+    struct node* temp;
+    temp=(struct node*)malloc(sizeof(struct node));
+    if(root==NULL)
+    {
+        root=temp;
+    }
+    else
+    {
+        temp->right=root;
+        root->left=temp;
+        root=temp;
+    }
+}
+
+int length()
+{
+    struct node* temp;
+    temp= root;
+    int count=0;
+    while(temp!=NULL)
+    {
+        count++;
+        temp=temp->right;
+    }
+    return count;
+}
+
+void display()
+{
+     struct node* temp;
+    temp= root;
+    
+    if(temp==NULL)
+    {
+        printf("list is empty");
+    }
+    else 
+    {
+        while(temp!=NULL)
+        {
+        printf("%d->",temp->data);
+        temp=temp->right;
+        }
+    }
+}
+
+void addatafter()
+{
+    int loc,i;
+    struct node* temp,*current;
+    temp=(struct node*)malloc(sizeof(struct node));
+    printf("enter location for insertion");
+    scanf("%d",&loc);
+  if(loc>length())
+  {
+      printf("invalid location,The nlink size is %d",length());
+  }
+  else
+  {
+        printf("emter data to be inserted");
+        scanf("%d",temp->data);
+        temp->right=NULL;
+        temp->left=NULL;
+        current=root;
+        while(i<loc)
+        {
+            current=current->right;
+            i++;
+        }
+        temp->right=current->right;
+        current->right->left=temp;
+        temp->left=current;
+        current->right=temp;
+  }
+    
+}
+
+int main()
+{
+    int n,j;
+    while(1)
+    {
+        printf("enter your choise\n 1 append\t 2 addatbegin\t 3 length\t 4 display\t 5 addatafter\t 6 to end");
+        scanf("%d",&n);
+        switch(n)
+        {
+            case 1:
+            append();
+            break;
+            case 2:
+            addatbegin();
+            break;
+            case 3:
+            j=length();
+            printf("the length is %d",j);
+            break;
+            case 4:
+            display();
+            break;
+            case 5:
+            addatafter();
+            break;
+            case 6:
+            return;
+            default:
+            printf("invalid input");
+            break;
+        }
+    }
+
+    return 0;
+}
