@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<stdlib.h>
+int stack[100],top=-1,n;
+void display();
+void pop();
+void push();
+int main()
+{
+int a;
+printf("enter the size of stack-");
+scanf("%d",&n);
+  while(1)
+  {
+    printf("1-push\n2-pop\n3-display\n4-exit\n");
+    scanf("%d",&a);
+    switch(a)
+    {
+    case 1:
+    push();
+    break;
+    case 2:
+    pop();
+    break;
+    case 3:
+    display();
+    break;
+    case 4:
+    exit(1);
+    default:
+    printf("invalid entry\n");
+    }
+   }
+return 0;
+}
+void push()
+{
+ if (top>=n-1)
+ printf("stack overflow\n");
+ else
+ {
+  int b;
+  scanf("%d",&b);
+  top ++;
+  stack[top]=b;
+ }
+}
+void pop()
+{
+if(top==-1)
+printf("stack inflow\n");
+else;
+{
+printf("the popped element is stack[top]\n");
+top--;
+}
+}
+void display()
+{
+ if(top>-1)
+ {
+ for (int i=top;i<0;top--)
+ printf("%d     ",stack[i]);
+ }
+ else 
+ printf("stack is empty\n");
+}
