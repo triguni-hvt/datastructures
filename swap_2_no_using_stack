@@ -1,0 +1,129 @@
+#include <stdio.h>
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+int stack[100],temp1[100],temp2[100],top=-1,top1=-1,top2=-1;
+   int n;
+void push(int a[],int *t,int *n,int ele)
+{
+ 
+    if(*n==*t)
+    {
+    cout<<"overflow";
+    }
+    else
+    {
+        *t=*t+1;
+        a[*t]=ele;
+    }
+      
+}
+int  pop(int a[],int *t)
+{
+    int d;
+    if(*t==-1)
+    {
+    cout<<"stack empty";
+    return 0;
+    }else
+    {
+        d=a[*t];
+        *t=*t-1;
+        return d;
+    }
+}
+void display(int a[],int *t,int *n)
+{
+    int i;
+    if(*t==-1)
+    cout<<"stack empty 1   ";
+    else
+    for(i=*t;i>=0;i--)
+    {
+        cout<<a[i]<<" ";
+    }
+}
+int search(int a[],int *t)
+{
+    int s,i;
+    cout<<"enter the element to be swapped ";
+    cin>>s;
+    for(i=top;i>=0;i--){
+        if(a[i]==s)
+        return i;
+    }
+    cout<<"element not found ";
+    return 0;
+}
+
+void swap1()
+{
+    int t1,t2,swap;
+     t1=pop(temp1,&top1);
+     t2=pop(temp2,&top2);
+      push(temp2,&top2,&n,t1);
+      push(temp1,&top1,&n,t2);
+}
+
+int main()
+{
+    
+
+   cout<<"enter size of stack";
+   cin>>n;
+   char ch='y';
+   while(ch=='y' || ch=='Y')
+   {
+       int ele;
+          cout<<"enter number";
+    cin>>ele;
+     push(stack,&top,&n,ele);
+     cout<<"do u want to continue y/n ";
+     cin>>ch;
+   }
+   cout<<"old stack  ";
+   display(stack,&top,&n);
+   cout<<endl;
+   int i1,i2,swap;
+ i1=search(stack,&top);
+ i2=search(stack,&top);
+
+if(i1>i2)
+{
+    swap=i1;
+    i1=i2;
+    i2=swap;
+}
+int i;
+for(i=top;i>=i2;i--)
+{
+    int p;
+    p=pop(stack,&top);
+    push(temp1,&top1,&n,p);
+}
+
+for(i=i2-1;i>=i1;i--)
+{
+    int p;
+    p=pop(stack,&top);
+    push(temp2,&top2,&n,p);
+}
+swap1();
+
+for(i=top2;i>=0;i--)
+{
+    int p;
+    p=pop(temp2,&top2);
+    push(stack,&top,&n,p);
+}
+for(i=top1;i>=0;i--)
+{
+    int p;
+      p=pop(temp1,&top1);
+    push(stack,&top,&n,p);
+}
+cout<<"new stack  ";
+display(stack,&top,&n);
+    return 0;
+}
